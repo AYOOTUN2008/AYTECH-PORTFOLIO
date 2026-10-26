@@ -68,3 +68,7 @@ Editor validation and website validation both recognise the hybrid category and 
 A provider outage fails closed, rather than resurrecting hidden projects. An invalid record is excluded; review its required fields and permissions if work is missing. Check Sanity status/quota and refresh after publishing. No autoplay, background tracking, client-side write key or required polling is used.
 
 Verification commands: `npm test`, `npm run build`, `npm run cms:check`, `npm run cms:build`, `npm run test:e2e`, `npm run test:categories`. Tests cover category semantics, validation, combined-project service discovery, gallery safety, browser history/reload, hidden-video pausing, no-JavaScript form submission and the mobile native selector. Real owner-account persistence and upload permissions still require the actual connection.
+
+## Replacement: simple on-site uploader
+
+The owner requested a simpler flow. New uploads now use `/manage` on the portfolio and Vercel Blob, rather than the separate Sanity Studio. See [SIMPLE-UPLOADER.md](SIMPLE-UPLOADER.md) for the current setup, owner routine and limitations. The Sanity instructions above are historical and are not required for the replacement.

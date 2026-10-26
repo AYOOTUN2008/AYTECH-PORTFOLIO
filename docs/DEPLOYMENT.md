@@ -71,3 +71,7 @@ On the actual production host check all routes, `/social-card`, `/robots.txt`, `
 Keep API keys server-side, limit provider permissions, review failures in provider dashboards without logging brief contents, monitor quota and rotate leaked keys. No analytics or error-reporting SDK is enabled by default. If adding logging, redact personal information. `npm run build` is required after changing canonical/index flags because most pages are prerendered. Restarting only a process is insufficient.
 
 If the application is hosted outside Vercel, retain a Node server (this is not a pure static export), configure HTTPS and a trusted proxy, and set the correct `INQUIRY_IP_HEADER`. The local server listens on port 3000; no cloud preview URL is provided by this onboarding flow.
+
+## On-site media manager (current)
+
+The portfolio now uses Vercel Blob for new project publishing at `/manage`; Sanity is not required for this flow. The public store and server signing secret have been connected to production. The owner must set `OWNER_PASSWORD` as a Production environment variable, then redeploy. Follow [SIMPLE-UPLOADER.md](SIMPLE-UPLOADER.md). Keep `PROJECT_INDEX_PATH` unset in production. All existing case studies remain alongside new uploads. Do not enable indexing until the existing launch requirements are fulfilled.

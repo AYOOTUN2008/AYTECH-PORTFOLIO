@@ -1,0 +1,6 @@
+import {readJson} from '@/lib/read-json';
+import {NextResponse} from 'next/server';
+import {ownerReady,ownerToken,validPassword,sameOrigin} from '@/lib/owner-auth';
+import {allowLogin} from '@/lib/owner-throttle';
+export async function POST(request:Request){if(!sameOrigin(request))return NextResponse.json({error:'Invalid origin'},{status:403});if(!ownerReady())return NextResponse.json({error:'Owner access has not been configured yet.'},{status:503});if(!await allowLogin(request))return NextResponse.json({error:'Too many sign-in attempts. Try again in 15 minutes.'},{status:429});const data=await readJson(request,1500).catch(()=>null);if(typeof data?.password!=='string'||!validPassword(data.password)){await new Promise(resolve=>setTimeout(resolve,1000));return NextResponse.json({error:'Incorrect password'},{status:401})}const response=NextResponse.json({ok:true});response.cookies.set('aytech-owner',ownerToken(),{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'strict',path:'/',maxAge:28800});return response}
+export async function DELETE(request:Request){if(!sameOrigin(request))return new Response(null,{status:403});const response=NextResponse.json({ok:true});response.cookies.delete('aytech-owner');return response}

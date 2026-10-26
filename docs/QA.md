@@ -93,3 +93,16 @@ Added exact public UGC / CGI / UGC + CGI filters with All work, counts, shareabl
 The supplied project ID `yn7q2h3e` and public `production` dataset were checked through an anonymous read-only API query (HTTP 200, initially zero project records). The standalone Studio was deployed at https://aytech-project-editor.vercel.app with its actual public build IDs; IDs are saved as production environment variables. Its Vercel Git root is configured as `studio/`. Hosted HTML, JavaScript assets, nested SPA route and actual project binding were verified.
 
 The website editor URL is saved, but its project-data environment binding is deliberately deferred until the owner imports/reviews/publishes the existing cases. This prevents the empty remote dataset from replacing the current portfolio. Owner CORS approval, login, real asset upload and publication still require the owner's signed-in account; no Sanity credential was requested in chat or extracted.
+
+## Simple on-site uploader — 26 October 2026
+
+The owner requested replacement of the Sanity editor with a lightweight manager. `/manage` now uses password-protected direct Blob uploads; `/work` uses a responsive social-style listing and dialog viewer. Original case studies and supplied assets are retained.
+
+- 42 unit/render/API checks pass, including new schema, signed-session expiry/tampering, origin and streamed-size checks.
+- Production Next.js build passes; production dependency audit reports zero vulnerabilities (targeted patched Zod override in Vercel's CLI-config dependency).
+- Browser integration against real Vercel media storage and an isolated private QA index: owner sign-in, MP4 and image direct multipart upload, publication, immediate gallery visibility, category selection, CDN playback (206 response), edit without upload, and immediate removal all pass.
+- Gallery at 320, 390, 768 and 1440 px has no horizontal overflow and zero axe WCAG 2 A/AA and 2.1 AA violations after finite entrance animations settle. Evidence: `artifacts/simple-manager-browser.json` and `simple-gallery-*.png`.
+- QA Chromium ignores certificate errors solely for the execution environment's HTTPS proxy. No certificate bypass is present in the website or upload code.
+- The mutable records and login counters use PRIVATE Blob storage with uncached reads. Public Blob media remains CDN-served and immutable. This avoids the public CDN's publication cache delay.
+- The real owner password has not been supplied to this environment or stored in Git. Production owner sign-in remains gated until OWNER_PASSWORD is set in Vercel and deployed. Local integration uses isolated test credentials and never writes QA projects to the live project index.
+- No adaptive streaming/transcoding or automated caption creation is claimed. Use browser-ready H.264 MP4 and burn accurate captions into spoken videos. Files remain in storage after unpublishing; the owner can remove unused files in Vercel Storage.
