@@ -1,0 +1,5 @@
+import Link from 'next/link';
+import {meta} from '@/lib/site';
+import {CTA} from '@/components/ui';
+export const metadata=meta('Field Notes | Creative Decisions with AYTECH','Practical explanations of UGC, CGI and responsible creative production. Start with a buyer’s guide to choosing the right advertising format.','/insights/');
+export default function Insights(){return <><section className="page-hero wrap"><p className="eyebrow">FIELD NOTES / CLEARER CREATIVE DECISIONS</p><h1>Less jargon.<br/><em>More perspective.</em></h1><p className="page-intro">Useful thinking for your next brief.</p></section><section className="wrap insight-list"><Link href="/insights/ugc-vs-cgi-ads/"><span className="mono">01 / BUYER’S GUIDE</span><h2>UGC or CGI?<br/><em>Start with the job.</em></h2><p>Which format fits your product, what assets you need and how to scope the right deliverables.</p><span className="circle-arrow" aria-hidden="true"><svg className="symbol" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 19 19 5M5 5h14v14"/></svg></span></Link></section><CTA/></>}

@@ -1,0 +1,66 @@
+[
+  {
+    "file": "public/images/projects/dge/dge-product-family.jpg",
+    "source": "dge-product-family.jpg",
+    "width": 2048,
+    "height": 1364,
+    "sha256": "bdfb2ce85db637aefa2c64f685c6ecaaf79150014d659b27a3297a52d305644c",
+    "treatment": "Original bytes copied unchanged"
+  },
+  {
+    "file": "public/logos/dge-logo.png",
+    "source": "dge-logo.png",
+    "width": 412,
+    "height": 147,
+    "sha256": "060d06814d539eaf6eeb8b5bd8adc2166c0d4c93e5b3d73083ab9ebb5c5ff7ee",
+    "treatment": "Original bytes copied unchanged"
+  },
+  {
+    "file": "public/images/projects/dge/dge-ugc-storyboard.jpg",
+    "source": "dge-ugc-storyboard.jpg",
+    "width": 1143,
+    "height": 2048,
+    "sha256": "4f7d71c7f663da14ddf95084c78f7a461b92414f97ec6e9ba1103b4353d6b66a",
+    "treatment": "Original bytes copied unchanged"
+  },
+  {
+    "file": "public/images/projects/dge/dge-power-bank-isolated.png",
+    "source": "dge-power-bank-isolated.png",
+    "width": 470,
+    "height": 1200,
+    "sha256": "4ef324fd276e002115656402f9a41dfe3a41a172c0690d52aea8cb60db1f9fb6",
+    "treatment": "Original bytes copied unchanged"
+  },
+  {
+    "file": "public/images/projects/dge/dge-power-bank-cropped.jpg",
+    "source": "dge-power-bank-cropped.jpg",
+    "width": 470,
+    "height": 1200,
+    "sha256": "52535388b29607cc87237c3e260806655375cbcf4c9a041679dc56b3c16cf1c6",
+    "treatment": "Original bytes copied unchanged"
+  },
+  {
+    "file": "public/images/projects/dge/dge-cable.jpg",
+    "source": "dge-cable.jpg",
+    "width": 928,
+    "height": 1104,
+    "sha256": "1ce1215fcc82ad41067722a44dadc7d3d17c8a296129b9f328dbe9e5b9d7a735",
+    "treatment": "Original bytes copied unchanged"
+  },
+  {
+    "file": "public/images/projects/dge/dge-charger.jpg",
+    "source": "dge-charger.jpg",
+    "width": 955,
+    "height": 1280,
+    "sha256": "e057c1909fb44c0a6bb2d4ac568ff90a4d94a99c581fb06a7d531d60ea7246db",
+    "treatment": "Original bytes copied unchanged"
+  },
+  {
+    "file": "public/images/projects/dge/dge-power-bank.jpg",
+    "source": "dge-power-bank.jpg",
+    "width": 955,
+    "height": 1280,
+    "sha256": "73b620a29a61324bc57683ff4a066e4f060b1b50ee3240b9796a84abe4a954f1",
+    "treatment": "Original bytes copied unchanged"
+  }
+]

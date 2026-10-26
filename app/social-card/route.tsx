@@ -1,0 +1,6 @@
+import {ImageResponse} from 'next/og';
+export const runtime='nodejs';
+
+const size={width:1200,height:630};
+
+export function GET(request:Request){const pages:Record<string,string>={'/':'Make them look twice.','/services/ugc-ads/':'A human connection.','/services/cgi-commercials/':'Unreal possibilities.','/work/':'Proof, with perspective.','/work/dge-gadgets-cgi/':'Power meets imagination.','/work/dge-life-doesnt-pause/':'Life doesn’t pause.','/about/':'Meet the creative mind.','/contact/':'Start with a hello.','/insights/':'A different perspective.','/insights/ugc-vs-cgi-ads/':'UGC or CGI? Start with the job.','/privacy/':'Your details. Handled with purpose.'};const headline=pages[new URL(request.url).searchParams.get('page')||'/']||pages['/'];return new ImageResponse(<div style={{background:'#0c0c11',color:'#f5f1e8',width:'100%',height:'100%',display:'flex',flexDirection:'column',padding:70,justifyContent:'space-between'}}><div style={{display:'flex',fontSize:32,letterSpacing:5}}>AYTECH / CREATIVE</div><div style={{display:'flex',fontSize:92,lineHeight:1.05,letterSpacing:-5}}>{headline}</div><div style={{display:'flex',color:'#bba8ff',fontSize:27}}>UGC that feels human. CGI that feels impossible.</div></div>,{...size})}

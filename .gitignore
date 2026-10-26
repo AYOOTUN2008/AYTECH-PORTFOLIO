@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.env*
+!.env.example
+*.tsbuildinfo
+artifacts/
+studio/dist/
+studio/.sanity/
+.vercel

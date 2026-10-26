@@ -1,0 +1,9 @@
+import Image from 'next/image';
+import {existsSync} from 'node:fs';
+import {join} from 'node:path';
+/** Owner originals only. Never generate, retouch, recolour or crop a likeness. */
+export default function Portrait({about=false}:{about?:boolean}){
+ const file=['aytech-portrait-display.webp','aytech-portrait-original.png','aytech-portrait-original.jpg','aytech-portrait-original.jpeg','aytech-portrait-original.webp'].find(name=>existsSync(join(process.cwd(),'public','images',name)));
+ if(about)return <div className={`about-portrait ${file?'has-portrait':''}`}>{file?<Image src={`/images/${file}`} alt="Portrait of AYTECH, Nigeria-based UGC and CGI creative director" fill sizes="(max-width: 767px) calc(100vw - 40px), 42vw" quality={85}/>:<><span aria-hidden="true">ay.</span><p>Reserved for the original photoshoot portrait.<br/>No generated likeness.</p></>}</div>;
+ return <div className={`portrait-stage ${file?'has-portrait':''}`}><div className="portrait-orbit"/><div className="portrait-top"><span>THE PERSON BEHIND THE IDEAS</span><span>01 / AY</span></div>{file?<div className="portrait-image-layer"><Image src={`/images/${file}`} alt="Portrait of AYTECH, Nigeria-based UGC and CGI creative director" fill sizes="(max-width: 767px) calc(100vw - 40px), 44vw" quality={85} priority fetchPriority="high"/></div>:<div className="portrait-placeholder"><span className="portrait-glyph" aria-hidden="true">a<span>y.</span></span><span className="portrait-rule"/><p>A space for the real me.</p><span>ORIGINAL PORTRAIT · AWAITING FILE UPLOAD</span></div>}<div className="portrait-bottom"><span>ONAKOYA ELIJAH AYOOTUN</span><span aria-hidden="true"><svg className="symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 19 19 5M5 5h14v14"/></svg></span></div><span className="portrait-side">HUMAN AT THE CENTRE. ALWAYS.</span></div>;
+}

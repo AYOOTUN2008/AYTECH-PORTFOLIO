@@ -1,0 +1,31 @@
+import {chromium} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+const base=process.env.TEST_BASE_URL||'http://localhost:3000';
+const routes=['/','/services/ugc-ads/','/services/cgi-commercials/','/work/','/work/dge-gadgets-cgi/','/work/dge-life-doesnt-pause/','/manage/','/about/','/contact/','/insights/','/insights/ugc-vs-cgi-ads/','/privacy/'];
+await fs.mkdir('artifacts',{recursive:true});
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+const context=await browser.newContext({viewport:{width:1440,height:1000}});
+const page=await context.newPage();
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+const report={routes:[],responsive:[],accessibility:[],forms:[],links:[],reducedMotion:false};
+try{
+ const titles=new Set();const hrefs=new Set();
+ for(const route of routes){const response=await page.goto(base+route);assert.equal(response.status(),200,route);assert.equal(await page.locator('h1').count(),1,route+' H1');assert.equal(await page.locator('img').evaluateAll(async imgs=>{imgs.forEach(i=>i.loading='eager');await Promise.all(imgs.map(i=>i.decode().catch(()=>null)));return imgs.filter(i=>!i.complete||i.naturalWidth===0).length}),0,route+' image failure');const title=await page.title();assert.ok(!titles.has(title),'Duplicate title');titles.add(title);assert.ok(await page.locator('meta[name=description]').getAttribute('content'));assert.ok((await page.locator('meta[name=robots]').getAttribute('content')).includes('noindex'));assert.equal(await page.locator('link[rel=canonical]').count(),0);assert.ok(!(await page.content()).includes('http://localhost:3000/og'),'Leaked localhost OG');
+ await page.evaluate(()=>document.getAnimations().forEach(a=>{if(Number.isFinite(a.effect?.getComputedTiming().endTime))a.finish()}));
+ const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();report.accessibility.push({route,violations:axe.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});
+ for(const href of await page.locator('a[href]').evaluateAll(els=>els.map(e=>e.getAttribute('href'))))if(href.startsWith('/')&&!href.includes('#'))hrefs.add(href);
+ report.routes.push({route,status:response.status(),title});
+ }
+ for(const href of hrefs){const r=await page.request.get(base+href);assert.equal(r.status(),200,href);report.links.push({href,status:r.status()})}
+ for(const width of [320,375,390,768,1440]){await page.setViewportSize({width,height:900});for(const route of routes){await page.goto(base+route);await page.evaluate(()=>document.fonts.ready);const dim=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));assert.ok(dim.scroll<=dim.width,`${route} overflow at ${width}: ${dim.scroll}`);report.responsive.push({width,route,overflow:false});}await page.goto(base);await page.evaluate(()=>document.getAnimations().forEach(a=>{if(Number.isFinite(a.effect?.getComputedTiming().endTime))a.finish()}));await page.screenshot({path:`artifacts/home-${width}.png`,fullPage:true});}
+ await page.setViewportSize({width:390,height:844});await page.goto(base);await page.getByRole('button',{name:'Menu +'}).click();assert.equal(await page.getByRole('button',{name:'Close −'}).getAttribute('aria-expanded'),'true');await page.getByRole('navigation').getByRole('link',{name:'CGI',exact:true}).click();await page.waitForURL('**/services/cgi-commercials');assert.equal(await page.getByRole('button',{name:'Menu +'}).getAttribute('aria-expanded'),'false');
+ await page.goto(base+'/contact/');await page.getByLabel('Your name').fill('Browser QA');await page.getByLabel('Email (required)').fill('qa@example.test');await page.getByLabel('What are we making?').selectOption('cgi');await page.getByLabel('Tell me about the idea').fill('A product film with two cutdowns for a new launch.');await page.getByLabel('I’ve read the').check();await page.getByRole('button',{name:'Send the brief'}).click();await page.getByRole('status').filter({hasText:'not connected yet'}).waitFor();assert.equal(await page.getByLabel('Your name').inputValue(),'Browser QA');report.forms.push('Unconfigured endpoint returns honest error and retains brief');
+ await page.route('**/api/inquiry',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({message:'Your brief has been accepted by the email service for delivery.'})}));await page.getByRole('button',{name:'Send the brief'}).click();await page.getByRole('button',{name:'Brief accepted'}).waitFor();assert.equal(await page.getByLabel('Your name').inputValue(),'');report.forms.push('Mocked success resets form and confirms provider acceptance');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto(base);assert.equal(await page.locator('.hero h1').evaluate(el=>getComputedStyle(el).animationName),'none');report.reducedMotion=true;
+ await page.keyboard.press('Tab');assert.equal(await page.locator(':focus').textContent(),'Skip to content');await page.keyboard.press('Enter');assert.equal(await page.locator(':focus').getAttribute('id'),'main');
+ assert.equal((await page.request.get(base+'/definitely-missing')).status(),404);const robots=await (await page.request.get(base+'/robots.txt')).text();assert.match(robots,/Disallow: \//);const sitemap=await (await page.request.get(base+'/sitemap.xml')).text();assert.ok(!sitemap.includes('localhost'));const og=await page.request.get(base+'/social-card');assert.equal(og.status(),200);assert.match(og.headers()['content-type'],/image\/png/);
+ assert.equal(errors.length,0,errors.join('\n'));assert.equal(report.accessibility.flatMap(x=>x.violations).length,0,'Accessibility violations: '+JSON.stringify(report.accessibility.filter(x=>x.violations.length)));
+ console.log(JSON.stringify({routes:report.routes.length,responsiveChecks:report.responsive.length,axeViolations:0,forms:report.forms,links:report.links.length,reducedMotion:report.reducedMotion},null,2));
+}finally{await fs.writeFile('artifacts/browser-report.json',JSON.stringify({...report,browserErrors:errors},null,2));await browser.close()}

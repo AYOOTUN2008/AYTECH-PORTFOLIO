@@ -1,0 +1,11 @@
+{
+  "source": "PORTFOLIO PIC.rar / PORTFOLIO PIC.png",
+  "file": "public/images/aytech-portrait-original.png",
+  "width": 1086,
+  "height": 1448,
+  "sha256": "7797911f5729d6ab11da9bf9e30318f51bee40a6f8f22cee10d1a41d31c7be9e",
+  "treatment": "Original bytes copied unchanged. No retouching, generated pixels, recolouring or crop.",
+  "displayFile": "public/images/aytech-portrait-display.webp",
+  "displaySha256": "2235899c936b0baca303584a647c9524bd82e2ac7cc55c51aff238e48e7a1864",
+  "displayTreatment": "Lossless WebP encoding, with complete decoded RGBA byte equality verified against the original PNG."
+}

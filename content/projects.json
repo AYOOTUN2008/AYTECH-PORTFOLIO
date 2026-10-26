@@ -1,0 +1,70 @@
+{
+  "projects": [
+    {
+      "slug": "dge-gadgets-cgi",
+      "title": "Power meets imagination.",
+      "brand": "DGE Gadgets",
+      "category": "CGI",
+      "status": "Spec / pitch exploration",
+      "year": null,
+      "isPublished": true,
+      "productionRole": "Concept direction, product-reference strategy and proposed film direction",
+      "summary": "A product-first exploration of cinematic scale, original brand references and the balance between spectacle and recognition.",
+      "image": "/images/projects/dge/dge-product-family.jpg",
+      "width": 2048,
+      "height": 1364,
+      "alt": "Supplied DGE product-family reference showing power banks, chargers, earbuds and cables against a gold background",
+      "mediaType": "Original product reference — not a finished CGI film",
+      "deliverables": [
+        "Creative territories",
+        "Product-reference selection",
+        "Proposed film direction"
+      ],
+      "results": null
+    },
+    {
+      "slug": "dge-life-doesnt-pause",
+      "title": "Life doesn’t pause.",
+      "brand": "DGE Gadgets",
+      "category": "UGC",
+      "status": "AI-assisted spec concept",
+      "year": 2026,
+      "isPublished": true,
+      "productionRole": "Concept direction, narrative structure, storyboard and proposed social-first edit",
+      "summary": "A graduation-day story about keeping a meaningful moment in frame. Human-first storytelling, with a transparent AI-assisted approach.",
+      "image": "/images/projects/dge/dge-ugc-storyboard.jpg",
+      "width": 1143,
+      "height": 2048,
+      "alt": "AI-generated storyboard reference of a woman holding a phone at a graduation celebration",
+      "mediaType": "AI-generated storyboard — not customer footage or a finished ad",
+      "deliverables": [
+        "Story concept",
+        "Scene structure",
+        "Storyboard reference",
+        "Social-first edit strategy"
+      ],
+      "results": null
+    }
+  ],
+  "publicationRequirements": [
+    "Original approved media",
+    "Verified project title and date",
+    "Confirmed production role",
+    "Explicit spec, pitch or commissioned status",
+    "Accurate AI-assisted disclosure",
+    "Rights to publish brand assets"
+  ],
+  "projectShape": {
+    "slug": "string",
+    "title": "string",
+    "category": "ugc | cgi | branding | digital",
+    "status": "spec concept | pitch sample | client work",
+    "isPublished": false,
+    "year": null,
+    "media": [],
+    "deliverables": [],
+    "productionRole": "",
+    "results": null
+  },
+  "notes": "Source: supplied Version 2 archive. Both published entries are spec/concept studies, not completed commissions. Original DGE assets are preserved; final videos and public-use permission remain launch requirements."
+}
