@@ -57,7 +57,7 @@ npm run cms:check
 npm run cms:build
 ```
 
-`studio/vercel.json` configures a standalone static build with SPA route fallback. Deploy `studio/` as the Vercel project root and set `SANITY_STUDIO_PROJECT_ID` and `SANITY_STUDIO_DATASET` there. The main site's `.vercelignore` deliberately excludes this separate editor source from the website deployment.
+`studio/vercel.json` configures a standalone static build with SPA route fallback. Deploy `studio/` as the Vercel project root and set `SANITY_STUDIO_PROJECT_ID` and `SANITY_STUDIO_DATASET` there. Each Vercel project selects its own build root: repository root for the website, `studio/` for the editor. The root ignore file retains editor source so Git builds can find it, while generated Studio output/caches and dependencies are excluded. The website TypeScript config excludes the separate Studio.
 
 Alternatively, an owner authenticated on their **own local machine** can run `npx sanity login` and `npm run deploy` from `studio/` to host on an available `*.sanity.studio` hostname. That CLI browser login uses a localhost callback, which is not directly reachable in this cloud chat workflow. Do not ask the owner to paste a callback credential or token into chat. The optional local `npx sanity exec scripts/seed.ts --with-user-token` imports the same hidden starter cases; the authenticated browser import tool is easier for most owners.
 

@@ -2,8 +2,11 @@
 node_modules
 .next
 artifacts
-studio
 tests
 docs
 .env*
 *.tsbuildinfo
+.vercel
+studio/dist
+studio/.sanity
+studio/node_modules
