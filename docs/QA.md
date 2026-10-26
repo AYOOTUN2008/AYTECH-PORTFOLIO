@@ -10,7 +10,7 @@ Validated in the cloud workspace on 26 October 2026. The deployable website and 
 | Website TypeScript | Passed as part of build |
 | Sanity editor build | Passed using explicit QA-only project identifier, not deployed |
 | Editor schema and seed TypeScript | Passed |
-| Automated unit/render tests | **32 passed, 0 failed, 0 skipped** (29 data/API/asset tests + 3 rendered-media tests) |
+| Automated unit/render tests | **38 passed, 0 failed, 0 skipped** (34 data/API/asset/category tests + 4 rendered-media tests) |
 | Browser content routes | **12 passed**, one H1 and distinct title/description each |
 | Responsive layout | **60 checks passed** at 320, 375, 390, 768 and 1440px, no horizontal overflow |
 | Automated accessibility | **0 axe violations**, all 12 pages, WCAG 2 A/AA, 2.1 AA and 2.2 AA rule tags |
@@ -81,3 +81,9 @@ The full-resolution unoptimized image was too slow under mobile throttling; it w
 Final portrait/motion mobile lab: Performance **93**, Accessibility **100**, Best Practices **100**, SEO **66** (staging noindex). LCP **3.3 s**, CLS **0**, TBT **50 ms**. The performance score exceeds the 90 target, but simulated LCP remains above the 2.5-second ambition; no field INP is established. No further score or ranking claim is made.
 
 The portrait/motion production deployment completed successfully at the existing alias. Home and About render the real portrait; the publicly served original PNG matches the supplied source SHA-256, and the responsive image endpoint returns a real WebP.
+
+## Self-service categories and image galleries
+
+Added exact public UGC / CGI / UGC + CGI filters with All work, counts, shareable query state and no-JavaScript form fallback. Hybrid work remains discoverable on both service pages. Existing video playback is paused when its category is hidden. The Sanity schema and read validation accept hybrid projects and up to 20 original project images with alt descriptions; managed cases render an uncropped image gallery.
+
+38 automated tests passed, including gallery rendering, filter semantics, combined CMS documents and invalid gallery media. Website build, editor TypeScript and standalone Studio build passed. The dedicated browser category suite passed exact selections, empty states, history/reload, hidden-video pause, native controls, 320px overflow checks and axe. Source-only tests do not establish that a real Sanity account is connected. An authenticated starter-import tool is prepared and compiles; real import/publish remains owner-account dependent.

@@ -1,0 +1,15 @@
+import {useState} from 'react';
+import {useClient} from 'sanity';
+import starter from '../lib/starter-data.json';
+import cgiCover from '../assets/dge-product-family.jpg?url';
+import ugcCover from '../assets/dge-ugc-storyboard.jpg?url';
+import {starterStory} from '../lib/starter-story';
+
+/** Authenticated owner action. Public visitors never receive a write credential. */
+export function StarterProjects(){
+ const client=useClient({apiVersion:'2025-02-19'});const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
+ async function importProjects(){setBusy(true);setMessage('Importing original project references…');let imported=0,preserved=0;
+  try{for(const p of starter.projects){const id='aytech-project-'+p.slug;const existing=await client.getDocuments([id,'drafts.'+id]);if(existing.some(Boolean)){preserved++;continue}const ugc=p.category==='UGC';const response=await fetch(ugc?ugcCover:cgiCover);if(!response.ok)throw Error('Original cover could not be loaded');const asset=await client.assets.upload('image',await response.blob(),{filename:p.image.split('/').pop()});await client.createIfNotExists({_id:id,_type:'project',title:p.title,slug:{_type:'slug',current:p.slug},brand:p.brand,category:p.category,status:p.status,...(p.year?{year:p.year}:{}),summary:p.summary,productionRole:p.productionRole,poster:{_type:'image',asset:{_type:'reference',_ref:asset._id},alt:p.alt},mediaType:p.mediaType,story:starterStory(ugc),deliverables:p.deliverables,isPublished:false,rightsConfirmed:false,sortOrder:ugc?20:10});imported++}setMessage(`${imported} imported; ${preserved} existing projects preserved. Open Project / Video, review the entries, confirm publication permission, enable Show on the website and Publish.`)}catch{setMessage('Import could not finish. Check that this editor origin is allowed in Sanity CORS settings and your account can edit the project. You can retry; existing projects will be preserved.')}finally{setBusy(false)}
+ }
+ return <div style={{padding:32,maxWidth:850,margin:'0 auto',lineHeight:1.7}}><p>AYTECH / OWNER SETUP</p><h1>Bring your existing work into the editor.</h1><p>This imports the two original DGE concept studies, their source covers and production disclosures. It will not overwrite an existing published entry or draft.</p><p>Imported projects start hidden, with publication permission unconfirmed. Review them before switching on the website’s managed gallery. They remain spec/concept work, not confirmed commissions or completed films.</p><button type="button" onClick={importProjects} disabled={busy} style={{padding:'14px 22px',border:'1px solid currentColor',borderRadius:8,background:'transparent',color:'inherit',font:'inherit',cursor:busy?'wait':'pointer'}}>{busy?'Importing…':'Import original case studies'}</button><p role="status" aria-live="polite">{message}</p><h2>Adding your next video or project</h2><p>Choose Project / Video. Add a title and cover, select UGC, CGI or UGC + CGI, then upload your MP4/WebM and optional project images. Add captions/transcript where needed, confirm rights and Publish. You can edit, reorder, hide or delete projects later.</p></div>;
+}

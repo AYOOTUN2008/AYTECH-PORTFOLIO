@@ -1,0 +1,49 @@
+{
+  "projects": [
+    {
+      "slug": "dge-gadgets-cgi",
+      "title": "Power meets imagination.",
+      "brand": "DGE Gadgets",
+      "category": "CGI",
+      "status": "Spec / pitch exploration",
+      "year": null,
+      "isPublished": true,
+      "productionRole": "Concept direction, product-reference strategy and proposed film direction",
+      "summary": "A product-first exploration of cinematic scale, original brand references and the balance between spectacle and recognition.",
+      "image": "/images/projects/dge/dge-product-family.jpg",
+      "width": 2048,
+      "height": 1364,
+      "alt": "Supplied DGE product-family reference showing power banks, chargers, earbuds and cables against a gold background",
+      "mediaType": "Original product reference \u2014 not a finished CGI film",
+      "deliverables": [
+        "Creative territories",
+        "Product-reference selection",
+        "Proposed film direction"
+      ],
+      "results": null
+    },
+    {
+      "slug": "dge-life-doesnt-pause",
+      "title": "Life doesn\u2019t pause.",
+      "brand": "DGE Gadgets",
+      "category": "UGC",
+      "status": "AI-assisted spec concept",
+      "year": 2026,
+      "isPublished": true,
+      "productionRole": "Concept direction, narrative structure, storyboard and proposed social-first edit",
+      "summary": "A graduation-day story about keeping a meaningful moment in frame. Human-first storytelling, with a transparent AI-assisted approach.",
+      "image": "/images/projects/dge/dge-ugc-storyboard.jpg",
+      "width": 1143,
+      "height": 2048,
+      "alt": "AI-generated storyboard reference of a woman holding a phone at a graduation celebration",
+      "mediaType": "AI-generated storyboard \u2014 not customer footage or a finished ad",
+      "deliverables": [
+        "Story concept",
+        "Scene structure",
+        "Storyboard reference",
+        "Social-first edit strategy"
+      ],
+      "results": null
+    }
+  ]
+}

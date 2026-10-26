@@ -1,0 +1,6 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {parsePortfolioFilter,matchesPortfolioFilter,matchesServiceCategory,portfolioCategories} from '../lib/categories.ts';
+test('public selector provides all work and the three requested categories',()=>{assert.deepEqual(portfolioCategories.map(c=>c.label),['All work','UGC','CGI','UGC + CGI']);assert.equal(parsePortfolioFilter('ugc-cgi'),'ugc-cgi');for(const input of ['bad',['ugc'],undefined,'<script>'])assert.equal(parsePortfolioFilter(input),'all')});
+test('public filters separate UGC, CGI and hybrid projects accurately',()=>{const categories=['UGC','CGI','UGC + CGI'];for(const filter of ['ugc','cgi','ugc-cgi'])assert.equal(categories.filter(c=>matchesPortfolioFilter(c,filter)).length,1);assert.equal(categories.filter(c=>matchesPortfolioFilter(c,'all')).length,3);assert.ok(matchesPortfolioFilter('UGC + CGI','ugc-cgi'));assert.equal(matchesPortfolioFilter('UGC + CGI','ugc'),false)});
+test('hybrid projects are still discoverable from both service pages',()=>{assert.equal(matchesServiceCategory('UGC + CGI','UGC'),true);assert.equal(matchesServiceCategory('UGC + CGI','CGI'),true);assert.equal(matchesServiceCategory('CGI','UGC'),false);assert.equal(matchesServiceCategory('UGC','CGI'),false)});

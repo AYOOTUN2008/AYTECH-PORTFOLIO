@@ -13,7 +13,8 @@
     "cms:build": "npm --prefix studio run build",
     "cms:check": "tsc --noEmit --project studio/tsconfig.json",
     "test:media": "node tests/media-browser.mjs",
-    "test:motion": "node tests/motion-browser.mjs"
+    "test:motion": "node tests/motion-browser.mjs",
+    "test:categories": "node tests/category-browser.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

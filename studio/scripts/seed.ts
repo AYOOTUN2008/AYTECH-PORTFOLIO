@@ -1,3 +1,4 @@
+import {starterStory} from '../lib/starter-story';
 /** Run once by the project owner: sanity exec scripts/seed.ts --with-user-token */
 import {getCliClient} from 'sanity/cli';
 import {createReadStream,readFileSync} from 'node:fs';
@@ -11,7 +12,7 @@ for(const p of projects){
  if(await client.getDocument(id)){console.log('Existing project preserved:',p.slug);continue;}
  const asset=await client.assets.upload('image',createReadStream(resolve(root,'public'+p.image)),{filename:p.image.split('/').pop()});
  const ugc=p.category==='UGC';
- const story=ugc?'The concept begins with a graduation-day moment: a woman wants to record her sister, but her phone battery is nearly empty. The product is relevant because it supports that human goal.\n\nThe proposed story moves through the moment, the interruption, a planned product-use shot, an emotional payoff, a scripted message and an original-brand end frame. The supplied image is an AI-generated storyboard, not a completed video or customer testimonial.\n\nMy role centres on concept direction, story structure and social-first edit planning. A final film, accurate product demonstration, captions and production approvals remain required. This is independent spec exploration, not a confirmed commission or endorsement.':'The exploration asks how everyday charging accessories can become memorable through cinematic direction without losing their actual identity. Original photographs and the original DGE logo are the reference lock.\n\nThree proposed territories inform the work: Power Unleashed, a cinematic product reveal; Life Doesn’t Pause, a graduation-day UGC-style story; and Break the Ordinary, an experimental motion concept.\n\nThe supplied product-family image is original brand reference material, not a frame from a completed CGI film. My role centres on concept direction and reference-led production planning. No paid commission, published campaign, brand endorsement or performance result is asserted.';
+ const story=starterStory(ugc);
  await client.createIfNotExists({_id:id,_type:'project',title:p.title,slug:{_type:'slug',current:p.slug},brand:p.brand,category:p.category,status:p.status,...(p.year?{year:p.year}:{}),summary:p.summary,productionRole:p.productionRole,poster:{_type:'image',asset:{_type:'reference',_ref:asset._id},alt:p.alt},mediaType:p.mediaType,story,deliverables:p.deliverables,isPublished:false,rightsConfirmed:false,sortOrder:ugc?20:10});
  console.log('Imported for owner review (hidden until permissions confirmed):',p.slug);
 }

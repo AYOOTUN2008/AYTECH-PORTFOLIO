@@ -1,72 +1,63 @@
-# Upload projects and videos yourself
+# Upload and categorise your own projects
 
-The site now has a **Projects & Videos** destination (`/work/`) with a dedicated **Screening Room** for finished films. An owner shortcut, **Manage projects**, is in the footer at `/manage/`.
+## Everyday workflow — after the one-time connection
 
-The self-service editor is built with Sanity Studio. It is a separate authenticated application; visitors cannot upload to your portfolio. **No Sanity account is connected yet**, so live upload/publish has not been exercised. A one-time connection is required; no paid website domain is needed and the Vercel URL can be supplied later.
+1. Open **Manage projects → Open project editor** and sign in to your own Sanity account.
+2. Create **Project / Video**. Enter a title, cover image, brief description and your actual role.
+3. Pick **UGC**, **CGI** or **UGC + CGI** from the category dropdown.
+4. Upload an optional finished **MP4/WebM** and up to **20 project images**. Add alt descriptions, drag images into order and describe what the media represents.
+5. Add a transcript/visual description for video, with **WebVTT captions** for speech or meaningful audio. MP4 encoded with H.264/AAC is recommended for broad compatibility; export MOV/AVI/MKV to MP4/WebM first.
+6. Write the project story, confirm publication permission, turn on **Show on the website** and **Publish**.
 
-## After the one-time connection: everyday use
+Refresh the website to see the update. No code edit, Git push, rebuild or assistant is needed for later content changes. You can edit, replace media, reorder, hide, unpublish or delete projects whenever needed. Keep published page addresses stable after sharing them.
 
-1. Open **Manage projects → Open project editor** and sign in to your Sanity account.
-2. Choose **Project / Video**, then create a document.
-3. Enter title, brand/project name, category, true status and your actual role. Generate the page address.
-4. Upload an original **cover image** and describe it with alt text. The site displays original assets without forced cropping or colour filters.
-5. Optionally upload a finished **MP4 or WebM** in Photos & video. MP4 encoded H.264/AAC is recommended for broad playback. MOV, AVI, MKV and unusual codecs should be exported to a supported format first; “any video” cannot mean every possible browser codec.
-6. Add captions as **WebVTT (.vtt)** for meaningful audio/speech, plus a transcript or visual description. For a genuinely silent film, turn off the speech/meaningful-audio field; a visual description is still required.
-7. Write the project story, actual deliverables and disclosure (e.g. AI-assisted dramatization or finished film).
-8. Confirm you have permission to publish, turn on **Show on the website**, then click **Publish**.
-9. Refresh your public Projects & Videos page. The server reads published content on each request; **no new site build, Git edit or request to an assistant is needed**.
+The public **Projects & Videos** page has **All work / UGC / CGI / UGC + CGI**. This filters both the screening room and project cards, updates counts and preserves a shareable URL. The three categories are exact: hybrid work has its own selection. Hybrid projects also appear on both UGC and CGI service pages. Changing categories pauses a hidden video. The selector has a server-rendered form fallback without JavaScript.
 
-You can edit existing projects, change display order (lower numbers first), replace media, or turn **Show on the website** off and publish to hide them. Deleting/unpublishing removes the project from the managed site. Keep published slugs stable to preserve shared links. Editing a draft does not change the public version until Publish is clicked. To add still-image or design projects, leave the video field empty.
+Image-only projects are supported. Every image stays uncropped; source product shapes, labels and logos must stay accurate. Synthetic actors and spec projects must be labelled honestly. Publishing does not turn a concept into a paid commission or verified customer testimonial.
 
-Uploads go directly to Sanity through its authenticated editor, avoiding Vercel's serverless request-body upload limit. Your public site reads media from the Sanity CDN. Storage/bandwidth/file-size allowances depend on the provider’s current plan; check quota and compress distribution copies before uploading. Do not put confidential client assets or personal data in published documents.
+## One-time account connection — still required
 
-## One-time setup (owner or deployment helper)
+**The editor is built, but no real Sanity account/project is connected yet.** No live account upload or publish has been verified. You do not need to send credentials in chat.
 
-This is account configuration, not a per-video task. Do not paste passwords or API keys into chat.
-
-1. Create/sign in to your account at `https://www.sanity.io/manage`. Create a project for AYTECH and a **public** dataset named `production`. This website integration is read-only and tokenless. Keep drafts/internal notes free of secrets; only approved public content belongs here.
-2. Copy `studio/.env.example` to `studio/.env.local`. Set the real project ID and dataset. Project IDs are public identifiers, not passwords.
-3. From the `studio/` directory:
-
-   ```sh
-   npm ci
-   npx sanity login
-   npm run dev
-   ```
-
-   Sign in through Sanity’s supported authentication. Do not add a write token to website code or a `NEXT_PUBLIC_` variable.
-4. Optional, to move the two existing DGE concept studies into your editor without retyping:
-
-   ```sh
-   npx sanity exec scripts/seed.ts --with-user-token
-   ```
-
-   This uploads the supplied original covers and imports source-based concept stories, **hidden** until you review them. It uses your authenticated CLI session. It never overwrites existing documents and does not auto-confirm publication rights. Review both entries, confirm permission, set Show on website, and Publish before switching the website to managed content. Original DGE assets must not be represented as paid commissions or finished films.
-5. Deploy your editor from `studio/`:
-
-   ```sh
-   npm run deploy
-   ```
-
-   Choose an available Sanity Studio hostname. Sanity provides a `*.sanity.studio` address; use the actual assigned address, not a guessed one. Check Sanity project API/CORS settings to allow that Studio origin with credentials. Authorize only people who should edit your portfolio. The public website server query does not require a browser CORS exception or a write token.
-6. In the website's Vercel environment settings set:
+1. At `https://www.sanity.io/manage`, create/open an AYTECH project and a **public** dataset named `production`. Note the **Project ID** in project settings. It is a public identifier, not an API key. The website uses public, published-only, read-only queries without a write token.
+2. Share only that public Project ID with the deployment helper. The existing Vercel connection can deploy the standalone editor as a separate Vercel project using `studio/vercel.json`; no Sanity CLI login/token is needed merely to build or host the editor. Use the real deployed hostname, never a sample QA project ID.
+3. In Sanity project **API → CORS origins**, add the actual editor origin and allow credentials. Authorise only the accounts that should edit the portfolio. You then sign in **inside the hosted editor**, through Sanity's own login.
+4. In the editor, open **Import existing work** and click **Import original case studies** if you want to keep the current DGE work. Original covers and source-based concept stories are imported hidden for review. Existing entries and drafts are preserved. Review the work, confirm rights, enable Show on website and Publish. DGE remains spec/concept material, not completed paid campaigns.
+5. Set the website's Vercel variables once:
 
    ```text
-   SANITY_PROJECT_ID=<your actual project ID>
+   SANITY_PROJECT_ID=<the actual public project ID>
    SANITY_DATASET=production
-   SANITY_STUDIO_URL=<the actual https://...sanity.studio URL>
+   SANITY_STUDIO_URL=<actual https://...vercel.app or https://...sanity.studio editor URL>
    ```
 
-   Redeploy the website **once** to connect it. `SITE_URL` can remain unset until the actual Vercel hostname is known; it is separate from editor functionality. Leave indexing disabled while launch checks remain incomplete.
-7. Once connected, Sanity is the authoritative project list. It replaces the local fallback studies, rather than bringing deleted/hidden projects back from source. Import/publish the DGE studies first if you want to retain them. Before connection, the site continues showing the original local cases.
-8. Test with a real authorized sample: publish an image-only project, then a short MP4/WebM with poster/transcript/captions, check playback and text on mobile, edit and hide it, and confirm the public site responds after refresh. No real account upload or publication was performed in this workspace.
+   Redeploy once to connect the website. Once connected, Sanity is the authoritative project list; deleted/hidden work will not return from a local fallback. Import/publish the DGE studies before connecting if you want to retain them. Before connection, the source-backed local cases stay visible.
+6. Verify a real authorised upload → Publish → edit → hide/delete cycle, plus actual poster, image, video and caption playback on mobile. No such account operation was performed during source-only QA.
 
-## Validation and maintenance
+No website write token is embedded in public code or sent to visitors. The editor uses the logged-in owner's Sanity permissions to upload directly, avoiding the website serverless request-body upload limit. The content and media remain in the owner's Sanity project. Published content is public; do not put confidential material, secrets or private client information in those documents.
 
-The editor validates required information, slug format, rights confirmation and accessible video context. The website independently validates content and accepts only HTTPS media from `cdn.sanity.io`, supported project categories and browser-ready file extensions. Invalid entries are excluded, never executed as HTML. Captions require the correct file type; transcript text is rendered as plain text.
+Storage, bandwidth and file-size allowances depend on Sanity's current plan. Start within the available plan limits and compress distribution copies before uploading. If video volume later needs adaptive streaming or exceeds quotas, evaluate a dedicated video host; no paid service or purchase is configured now.
 
-A provider outage fails closed rather than resurrecting hidden projects or showing unapproved draft media. It can temporarily leave the managed gallery empty; check Sanity status and quota if published work is missing. Refresh the site after publishing. No polling, automatic page refresh, video autoplay or client-side write credentials are used.
+## Developer build / alternate hosting
 
-Commands: main app `npm run build`, `npm test`, `npm run test:e2e`; editor `npm --prefix studio ci` and `npm --prefix studio run build`. Studio requires Node 22.12+; Node 24 is tested. Studio schema/seed TypeScript check: `./node_modules/.bin/tsc --noEmit --project studio/tsconfig.json` after installing both packages.
+Node 24 is tested. Studio requires Node 22.12+.
 
-Source-backed automated tests cover published-only query filters, unsafe media rejection, captions/transcript requirements, live read behavior, duplicate/malformed documents and provider failure. These tests are not a substitute for owner-account login, genuine upload and live playback verification.
+```sh
+npm ci
+npm --prefix studio ci
+npm run cms:check
+# Set the real public IDs first, in studio/.env.local or the build environment:
+npm run cms:build
+```
+
+`studio/vercel.json` configures a standalone static build with SPA route fallback. Deploy `studio/` as the Vercel project root and set `SANITY_STUDIO_PROJECT_ID` and `SANITY_STUDIO_DATASET` there. The main site's `.vercelignore` deliberately excludes this separate editor source from the website deployment.
+
+Alternatively, an owner authenticated on their **own local machine** can run `npx sanity login` and `npm run deploy` from `studio/` to host on an available `*.sanity.studio` hostname. That CLI browser login uses a localhost callback, which is not directly reachable in this cloud chat workflow. Do not ask the owner to paste a callback credential or token into chat. The optional local `npx sanity exec scripts/seed.ts --with-user-token` imports the same hidden starter cases; the authenticated browser import tool is easier for most owners.
+
+## Validation and recovery
+
+Editor validation and website validation both recognise the hybrid category and an optional original-image gallery. Required poster/alt/story/role fields, rights confirmation, media disclosures, transcript and caption checks remain active. The website accepts only HTTPS assets from `cdn.sanity.io`; content text is escaped and never executed as HTML.
+
+A provider outage fails closed, rather than resurrecting hidden projects. An invalid record is excluded; review its required fields and permissions if work is missing. Check Sanity status/quota and refresh after publishing. No autoplay, background tracking, client-side write key or required polling is used.
+
+Verification commands: `npm test`, `npm run build`, `npm run cms:check`, `npm run cms:build`, `npm run test:e2e`, `npm run test:categories`. Tests cover category semantics, validation, combined-project service discovery, gallery safety, browser history/reload, hidden-video pausing, no-JavaScript form submission and the mobile native selector. Real owner-account persistence and upload permissions still require the actual connection.

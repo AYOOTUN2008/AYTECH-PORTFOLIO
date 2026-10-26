@@ -42,3 +42,7 @@ The `/work/` destination now includes a finished-video Screening Room and projec
 ## Changes delivered
 
 New Next.js App Router / TypeScript application, shared visual components and self-hosted fonts; twelve content routes, 404, social image, icon, sitemap and robots; validated server inquiry delivery adapter; Resend idempotency and Upstash atomic rate limiting; secure configuration sample; production build, browser/axe tests and delivery tests; Vercel deployment and QA documentation.
+
+## Owner category controls
+
+The owner schema now offers UGC, CGI and UGC + CGI, with a multi-image gallery in addition to the poster/video. The public work page uses progressively enhanced, shareable category filtering without removing server-rendered project links. Hidden films pause. Supporting legacy category values are still readable; the three primary choices are the authoring UI. Sanity Studio can be hosted as a separate static Vercel application and supports an authenticated import of the original local case studies without overwriting existing work.
