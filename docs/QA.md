@@ -68,7 +68,7 @@ Vercel CLI deployment completed successfully. Vercel automatically assigned the 
 
 The homepage returns HTTP 200 with the expected AYTECH title/headline and `X-Robots-Tag: noindex, nofollow`. Fourteen live checks passed, including home, work, both DGE studies, both services, about, contact, manage, privacy, robots, sitemap, social card and an intentional missing-page 404. Trailing-slash links correctly redirect to normalized paths. A valid test inquiry returned the expected unconfigured-service 503; no email was sent. Record: `artifacts/live-deployment-check.json`.
 
-Actual canonical URL configuration and final social/schema validation remain launch tasks; staging currently omits unconfigured canonical data rather than guessing it. The editor and email-delivery accounts are still not connected. GitHub was linked by Vercel, but no source commit or push was performed; this deployment used the local source upload.
+Actual canonical URL configuration and final social/schema validation remain launch tasks; staging currently omits unconfigured canonical data rather than guessing it. The editor and email-delivery accounts are still not connected. The initial deployment used a local source upload. The complete source has subsequently been committed and pushed to GitHub on `main`; local and remote commit identities were verified to match.
 
 ## Portrait and live motion update
 

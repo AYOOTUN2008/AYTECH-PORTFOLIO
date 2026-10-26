@@ -2,7 +2,7 @@
 
 ## 1. Put this source in your repository
 
-The review site is already deployed at https://aytech-portfolio-fawn.vercel.app using a Vercel CLI local-source upload. The first deployment was automatically assigned to production, with indexing still disabled. This workspace has not pushed the source to GitHub. Review the source and push it to `AYOOTUN2008/AYTECH-PORTFOLIO` using your normal Git workflow. The checkout started on an unborn `work` branch, with no existing commits or main branch.
+The review site is already deployed at https://aytech-portfolio-fawn.vercel.app using a Vercel CLI local-source upload. The first deployment was automatically assigned to production, with indexing still disabled. The complete website, original assets, owner editor, tests and documentation are now committed and pushed to `AYOOTUN2008/AYTECH-PORTFOLIO` on `main`. The checkout originally started without commits; `main` now contains the deployable source. Future changes can be committed to this branch and deployed through the connected Vercel project.
 
 In Vercel, import that GitHub repository. Use Next.js defaults, the repository root as Root Directory, Node 24.x, `npm ci` for installation and `npm run build` for build. Vercel provides a free `*.vercel.app` address; a paid custom domain is optional. Plan availability and usage limits are provider-controlled.
 
