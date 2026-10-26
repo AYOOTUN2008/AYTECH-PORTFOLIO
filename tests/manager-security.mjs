@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {writeFile} from 'node:fs/promises';
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:3001';if(!['localhost','127.0.0.1'].includes(new URL(base).hostname))throw Error('Use an isolated local QA server');
 const headers={origin:base,'Content-Type':'application/json','x-vercel-forwarded-for':'qa-security-'+Date.now()};const statuses=[];
-for(let i=0;i<6;i++){const response=await fetch(base+'/api/manage/session',{method:'POST',headers,body:JSON.stringify({password:'incorrect-test-password'})});statuses.push(response.status())}assert.deepEqual(statuses,[401,401,401,401,401,429]);
+for(let i=0;i<6;i++){const response=await fetch(base+'/api/manage/session',{method:'POST',headers,body:JSON.stringify({password:'incorrect-test-password'})});statuses.push(response.status)}assert.deepEqual(statuses,[401,401,401,401,401,429]);
 const auth=await fetch(base+'/api/manage/session',{method:'POST',headers:{...headers,'x-vercel-forwarded-for':'qa-concurrency-'+Date.now()},body:JSON.stringify({password:'local-qa-only-strong-password'})});assert.equal(auth.status,200);const cookie=auth.headers.get('set-cookie').split(';')[0];
 const project={id:crypto.randomUUID(),title:'QA ONLY — stale write must fail',description:'This document must never be saved.',category:'CGI',media:[{url:'https://qa.public.blob.vercel-storage.com/projects/not-uploaded.mp4',type:'video',width:640,height:360}]};
 const stale=await fetch(base+'/api/manage/projects',{method:'POST',headers:{...headers,cookie},body:JSON.stringify({project,etag:'stale-revision'})});assert.equal(stale.status,409);
