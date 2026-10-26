@@ -1,5 +1,12 @@
 # Upload and categorise your own projects
 
+## Current connection
+
+- Sanity Project ID: `yn7q2h3e`; public `production` dataset verified.
+- Owner editor: https://aytech-project-editor.vercel.app — deployed successfully and built for this project.
+- Editor build IDs are saved in Vercel; its Git build root is `studio/`.
+- Website owner link is configured. The public gallery remains on the existing local cases until the owner authorises the editor origin, imports/reviews/publishes the starters, and the published-data migration is verified. No write token is needed in chat.
+
 ## Everyday workflow — after the one-time connection
 
 1. Open **Manage projects → Open project editor** and sign in to your own Sanity account.
@@ -17,7 +24,7 @@ Image-only projects are supported. Every image stays uncropped; source product s
 
 ## One-time account connection — still required
 
-**The editor is built, but no real Sanity account/project is connected yet.** No live account upload or publish has been verified. You do not need to send credentials in chat.
+**The editor is deployed for the supplied Sanity project.** The production dataset was empty when checked; owner login, CORS approval and actual import/upload/publish remain to be verified. You do not need to send credentials in chat.
 
 1. At `https://www.sanity.io/manage`, create/open an AYTECH project and a **public** dataset named `production`. Note the **Project ID** in project settings. It is a public identifier, not an API key. The website uses public, published-only, read-only queries without a write token.
 2. Share only that public Project ID with the deployment helper. The existing Vercel connection can deploy the standalone editor as a separate Vercel project using `studio/vercel.json`; no Sanity CLI login/token is needed merely to build or host the editor. Use the real deployed hostname, never a sample QA project ID.

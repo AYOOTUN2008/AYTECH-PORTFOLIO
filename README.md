@@ -26,7 +26,7 @@ See [Version 2 asset audit](docs/ASSET-AUDIT.md), [Vercel deployment](docs/DEPLO
 
 ## Self-service uploads
 
-The Projects & Videos page and Sanity owner editor are built, with UGC / CGI / UGC + CGI categories, a public dropdown filter, video uploads and multi-image galleries. After a one-time account connection, publish new videos and projects without code edits or site rebuilds. See [upload and editor setup](docs/CONTENT-MANAGEMENT.md). No CMS account is connected yet.
+The Projects & Videos page and Sanity owner editor are built, with UGC / CGI / UGC + CGI categories, a public dropdown filter, video uploads and multi-image galleries. After a one-time account connection, publish new videos and projects without code edits or site rebuilds. See [upload and editor setup](docs/CONTENT-MANAGEMENT.md). The editor is deployed at https://aytech-project-editor.vercel.app for Sanity project yn7q2h3e. Owner CORS approval, content import/publication and the website data switch remain pending.
 
 ## Confirmed public contacts
 

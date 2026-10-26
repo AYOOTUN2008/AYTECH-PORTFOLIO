@@ -87,3 +87,9 @@ The portrait/motion production deployment completed successfully at the existing
 Added exact public UGC / CGI / UGC + CGI filters with All work, counts, shareable query state and no-JavaScript form fallback. Hybrid work remains discoverable on both service pages. Existing video playback is paused when its category is hidden. The Sanity schema and read validation accept hybrid projects and up to 20 original project images with alt descriptions; managed cases render an uncropped image gallery.
 
 38 automated tests passed, including gallery rendering, filter semantics, combined CMS documents and invalid gallery media. Website build, editor TypeScript and standalone Studio build passed. The dedicated browser category suite passed exact selections, empty states, history/reload, hidden-video pause, native controls, 320px overflow checks and axe. Source-only tests do not establish that a real Sanity account is connected. An authenticated starter-import tool is prepared and compiles; real import/publish remains owner-account dependent.
+
+## Real Sanity project / hosted editor setup
+
+The supplied project ID `yn7q2h3e` and public `production` dataset were checked through an anonymous read-only API query (HTTP 200, initially zero project records). The standalone Studio was deployed at https://aytech-project-editor.vercel.app with its actual public build IDs; IDs are saved as production environment variables. Its Vercel Git root is configured as `studio/`. Hosted HTML, JavaScript assets, nested SPA route and actual project binding were verified.
+
+The website editor URL is saved, but its project-data environment binding is deliberately deferred until the owner imports/reviews/publishes the existing cases. This prevents the empty remote dataset from replacing the current portfolio. Owner CORS approval, login, real asset upload and publication still require the owner's signed-in account; no Sanity credential was requested in chat or extracted.
