@@ -10,3 +10,7 @@ export function parsePortfolioFilter(value:unknown):PortfolioFilter{return portf
 export function matchesPortfolioFilter(category:string,filter:PortfolioFilter){return filter==='all'||category===portfolioCategories.find(c=>c.value===filter)?.label}
 /** Hybrid projects belong on both service landing pages. */
 export function matchesServiceCategory(category:string,service?:'UGC'|'CGI'){return !service||category===service||category==='UGC + CGI'}
+
+export type MediaFilter='all'|'video'|'image';
+export function parseMediaFilter(value:unknown):MediaFilter{return value==='video'||value==='image'?value:'all'}
+export function matchesMediaFilter(hasVideo:boolean,filter:MediaFilter){return filter==='all'||(filter==='video'?hasVideo:!hasVideo)}
