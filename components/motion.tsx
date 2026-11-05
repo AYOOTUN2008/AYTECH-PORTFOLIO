@@ -28,7 +28,7 @@ export default function Motion(){
    cleanup.push(()=>document.documentElement.classList.remove('motion-ready'));
 
    // Animate only when an element enters view. Nothing is pre-hidden in CSS.
-   const candidates=document.querySelectorAll<HTMLElement>('.section-label, .section-heading h2, .section-heading>p, .world-card, .project-card, .process-grid article, .capability-list>a, .faqs details, .manifesto h2, .manifesto-bottom>p, .cta-section h2, .page-hero h1, .page-hero-bottom>*, .reference-grid figure, .cms-story>p, .insight-list>a, .contact-layout>aside, .inquiry-form, .about-body>.prose, .case-storyboard>figure, .storyboard-context, .video-empty, .footer-top');
+   const candidates=document.querySelectorAll<HTMLElement>('.section-label, .section-heading h2, .section-heading>p, .world-card, .project-card, .refined-service, .showcase-card, .process-grid article, .capability-list>a, .faqs details, .manifesto h2, .manifesto-bottom>p, .cta-section h2, .page-hero h1, .page-hero-bottom>*, .reference-grid figure, .cms-story>p, .insight-list>a, .contact-layout>aside, .inquiry-form, .about-body>.prose, .case-storyboard>figure, .storyboard-context, .video-empty, .footer-top');
    const observer=new IntersectionObserver(entries=>{
     for(const entry of entries){if(!entry.isIntersecting)continue;const el=entry.target as HTMLElement;observer.unobserve(el);const siblings=Array.from(el.parentElement?.children||[]);const stagger=el.matches('.project-card,.world-card,.process-grid article,.reference-grid figure')?Math.min(siblings.indexOf(el)*75,225):0;
      const animation=el.animate([{opacity:.22,transform:'translate3d(0,26px,0)'},{opacity:1,transform:'translate3d(0,0,0)'}],{duration:820,delay:stagger,easing:'cubic-bezier(.16,1,.3,1)',fill:'none'});
@@ -51,7 +51,7 @@ export default function Motion(){
      listen(el,'pointerenter',enter);listen(el,'pointermove',move);listen(el,'pointerleave',leave);cleanup.push(()=>el.classList.remove('pointer-active'));
     });
     // Surface depth belongs to the illustration; original product pixels stay intact.
-    document.querySelectorAll<HTMLElement>('.world-card,.project-card,.abstract-art.large,.video-empty,.about-portrait').forEach(el=>{
+    document.querySelectorAll<HTMLElement>('.world-card,.project-card,.refined-service,.showcase-card,.abstract-art.large,.video-empty,.about-portrait').forEach(el=>{
      let rect:DOMRect|null=null;
      const move=(event:Event)=>{const e=event as PointerEvent;if(e.pointerType==='touch')return;if(!rect)rect=el.getBoundingClientRect();const nx=(e.clientX-rect.left)/rect.width-.5,ny=(e.clientY-rect.top)/rect.height-.5;write(el,{'--surface-x':`${(nx*14).toFixed(2)}px`,'--surface-y':`${(ny*10).toFixed(2)}px`,'--tilt-x':`${(-ny*7).toFixed(2)}deg`,'--tilt-y':`${(nx*7).toFixed(2)}deg`,'--spot-x':`${(nx+.5)*100}%`,'--spot-y':`${(ny+.5)*100}%`});el.classList.add('surface-active')};
      const leave=()=>{rect=null;el.classList.remove('surface-active');write(el,{'--surface-x':'0px','--surface-y':'0px','--tilt-x':'0deg','--tilt-y':'0deg'})};

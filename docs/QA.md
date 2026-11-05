@@ -110,3 +110,7 @@ The owner requested replacement of the Sanity editor with a lightweight manager.
 - QA media files have been removed from the public store. The live private project index contains no QA entries.
 
 - Live verification after credential activation: `/work` and `/manage` return 200, the password field is present, Blob upload/media CSP permissions are active, anonymous admin reads return 401, and no QA projects appear. Search indexing remains disabled. Evidence: `artifacts/simple-uploader-live.json`.
+
+## Calmer visual direction — 5 November 2026
+
+See [UI-REFINEMENT.md](UI-REFINEMENT.md) for the ivory/plum design, reduced homepage/service-page content, preserved functionality and current verification. Production build, 42 unit/render/API checks, 12-route/60-size browser checks, category and motion checks pass. The authenticated owner form and image-project viewer also pass mobile axe checks. Original product/logo and portrait hash checks still pass.
