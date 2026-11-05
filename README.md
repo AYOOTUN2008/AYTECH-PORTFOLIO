@@ -26,7 +26,7 @@ See [Version 2 asset audit](docs/ASSET-AUDIT.md), [Vercel deployment](docs/DEPLO
 
 ## Self-service uploads
 
-The simple owner uploader lives at `/manage` on the portfolio website. Upload video/images, enter title and description, choose UGC / CGI / UGC + CGI, and publish. New projects appear in a social-style gallery with a modal player, without a rebuild. Public media storage and private project-record storage are connected on Vercel. The owner’s production password is configured and sign-in is active. See [simple uploader guide](docs/SIMPLE-UPLOADER.md). Sanity is not required for this publishing flow; the older Studio source is retained for reference.
+The simple owner uploader lives at `/manage` on the portfolio website. Upload video/images, enter title and description, choose UGC / CGI / UGC + CGI, and publish. New projects appear in a social-style gallery with a modal player, without a rebuild. The same manager now supports uploading/replacing a PDF CV (up to 10 MB), with a public Download CV link after publication. Public media storage and private project-record storage are connected on Vercel. The owner’s production password is configured and sign-in is active. See [simple uploader guide](docs/SIMPLE-UPLOADER.md). Sanity is not required for this publishing flow; the older Studio source is retained for reference.
 
 ## Confirmed public contacts
 

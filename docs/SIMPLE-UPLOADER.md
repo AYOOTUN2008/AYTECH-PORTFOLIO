@@ -35,3 +35,11 @@ The project index contains presentation metadata and is kept in the private reco
 ## Tests
 
 `npm test` covers asset integrity, categories, existing API behavior, media rendering, managed-entry validation, owner session tampering/expiry, origin checks and bounded JSON parsing. `npm run build` verifies production compilation. `node tests/simple-manager-browser.mjs` verifies the owner UI, upload, publish/edit/remove, public cards, playback and mobile accessibility against an isolated QA index (requires configured test server). It must not point at production's index.
+
+## CV uploads
+
+Sign in at `/manage`, then use **Your CV** above the project form. Select a PDF up to 10 MB and press **Upload CV**. **Replace CV** updates it without a rebuild. The header automatically shows **Download CV** only when a CV is published; mobile visitors find it in the navigation menu. `/cv` delivers the current PDF as an attachment named AYTECH-CV.pdf. WhatsApp/email choices are separate, visible header buttons on desktop and mobile.
+
+The PDF upload uses the existing public media store, and its current-file record uses the private records store. No additional service or environment variable is required. CV upload/replace/removal requires the existing owner session, same-origin requests and conditional writes. Publication validates the upload namespace, PDF MIME type, size and signature. There is no fabricated placeholder CV. Remove CV disables the website download and hides the navigation link; old uploaded copies remain in public object storage until removed in Vercel Storage.
+
+For isolated integration QA, set `CV_INDEX_PATH=qa/cv-test.json` and `PROJECT_INDEX_PATH=qa/cv-projects-test.json` on a local test server, with a test-only owner password/signing secret and the storage connection tokens. Run `node tests/cv-browser.mjs`; never point QA at the live CV record. This test creates its own clearly labelled PDF fixture and records the resulting public fixture URLs for cleanup.
