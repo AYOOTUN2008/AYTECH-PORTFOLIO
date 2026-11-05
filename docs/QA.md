@@ -118,3 +118,9 @@ See [UI-REFINEMENT.md](UI-REFINEMENT.md) for the ivory/plum design, reduced home
 ## Reference-led charcoal/teal update — 5 November 2026
 
 The owner supplied dark/teal visual references; these supersede the earlier ivory/plum palette. See [UI-REFINEMENT.md](UI-REFINEMENT.md) for current layout, shared gallery cards, combined category/media filters and verification. Production build, 43 unit/render/API checks, 12-route/60-size browser checks, extended filter checks and motion checks pass. Mobile owner-form and project-viewer checks show zero axe violations. The final compact gallery header also passes five-width overflow and axe checks. Supplied portrait/product/logo files retain their verified hashes.
+
+## Prominent direct contact choices — 5 November 2026
+
+Added a clearly visible start-project panel above the contact form, with equal-width side-by-side WhatsApp and Send email buttons. Shared project-invitation sections use the same two buttons. WhatsApp uses its familiar green and opens the configured number with a prefilled inquiry; email opens the configured address with a project subject. Clients choose their method directly.
+
+Production build passes. Targeted browser checks cover home, contact and work pages at 320/390/768/1440: correct WhatsApp/email destinations, equal widths and horizontal alignment, no overflow, and zero axe WCAG violations. Contact choices appear in the first screen on the contact page. Links were inspected without sending a message or email. Evidence: `artifacts/direct-contact-checks.json` and `direct-contact-*.png`.
