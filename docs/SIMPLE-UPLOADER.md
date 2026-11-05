@@ -4,7 +4,7 @@ The owner publishes at `/manage` on the portfolio website. Sanity is no longer p
 
 ## Owner routine
 
-1. Open `https://aytech-portfolio-fawn.vercel.app/manage/` and sign in.
+1. Open `https://aytechcreative.vercel.app/manage/` and sign in.
 2. Select a video and/or project images.
 3. Enter title and description; choose UGC, CGI or UGC + CGI.
 4. Publish. Updates are read on the next page request, without a build.

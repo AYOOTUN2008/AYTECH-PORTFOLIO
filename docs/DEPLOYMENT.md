@@ -2,7 +2,7 @@
 
 ## 1. Put this source in your repository
 
-The review site is already deployed at https://aytech-portfolio-fawn.vercel.app using a Vercel CLI local-source upload. The first deployment was automatically assigned to production, with indexing still disabled. The complete website, original assets, owner editor, tests and documentation are now committed and pushed to `AYOOTUN2008/AYTECH-PORTFOLIO` on `main`. The checkout originally started without commits; `main` now contains the deployable source. Future changes can be committed to this branch and deployed through the connected Vercel project.
+The review site is already deployed at https://aytechcreative.vercel.app using a Vercel CLI local-source upload. The first deployment was automatically assigned to production, with indexing still disabled. The complete website, original assets, owner editor, tests and documentation are now committed and pushed to `AYOOTUN2008/AYTECH-PORTFOLIO` on `main`. The checkout originally started without commits; `main` now contains the deployable source. Future changes can be committed to this branch and deployed through the connected Vercel project.
 
 In Vercel, import that GitHub repository. Use Next.js defaults, the repository root as Root Directory, Node 24.x, `npm ci` for installation and `npm run build` for build. Vercel provides a free `*.vercel.app` address; a paid custom domain is optional. Plan availability and usage limits are provider-controlled.
 
@@ -75,3 +75,7 @@ If the application is hosted outside Vercel, retain a Node server (this is not a
 ## On-site media manager (current)
 
 The portfolio now uses Vercel Blob for new project publishing at `/manage`; Sanity is not required for this flow. The public store and server signing secret have been connected to production. The owner has set `OWNER_PASSWORD` directly in Vercel Production and the site has been redeployed. Future credential changes also require redeployment. Follow [SIMPLE-UPLOADER.md](SIMPLE-UPLOADER.md). Keep `PROJECT_INDEX_PATH` unset in production. All existing case studies remain alongside new uploads. Do not enable indexing until the existing launch requirements are fulfilled.
+
+## Short public address — 5 November 2026
+
+The portfolio is available at **https://aytechcreative.vercel.app**. The requested `aytech-portfolio.vercel.app` was already in use. The shorter AYTECH Creative address is attached as a project domain to the existing Vercel project `aytech-portfolio`, so it is public and follows future production deployments. It is not merely a deployment-only alias. No repository or project identifier was renamed.

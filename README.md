@@ -33,7 +33,7 @@ The simple owner uploader lives at `/manage` on the portfolio website. Upload vi
 - aytechservices13@gmail.com
 - WhatsApp: +234 816 937 8718
 
-No custom domain is needed. Use the actual Vercel-assigned subdomain once deployed. Review deployment is live at https://aytech-portfolio-fawn.vercel.app (26 October 2026). Search indexing remains disabled. The portrait and live motion are integrated. Real email-delivery setup remains pending.
+No custom domain is needed. Use the actual Vercel-assigned subdomain once deployed. Review deployment is live at https://aytechcreative.vercel.app (26 October 2026). Search indexing remains disabled. The portrait and live motion are integrated. Real email-delivery setup remains pending.
 
 ## Portrait and live motion
 
