@@ -43,3 +43,9 @@ Sign in at `/manage`, then use **Your CV** above the project form. Select a PDF 
 The PDF upload uses the existing public media store, and its current-file record uses the private records store. No additional service or environment variable is required. CV upload/replace/removal requires the existing owner session, same-origin requests and conditional writes. Publication validates the upload namespace, PDF MIME type, size and signature. There is no fabricated placeholder CV. Remove CV disables the website download and hides the navigation link; old uploaded copies remain in public object storage until removed in Vercel Storage.
 
 For isolated integration QA, set `CV_INDEX_PATH=qa/cv-test.json` and `PROJECT_INDEX_PATH=qa/cv-projects-test.json` on a local test server, with a test-only owner password/signing secret and the storage connection tokens. Run `node tests/cv-browser.mjs`; never point QA at the live CV record. This test creates its own clearly labelled PDF fixture and records the resulting public fixture URLs for cleanup.
+
+## Retrying a failed save
+
+Keep the editor tab open and use **Retry publish**. The form and completed uploads are retained in that tab, so retrying does not upload the same selected files again. A response lost after saving will not create a second copy of the project. Do not assume an unpublished draft or browser file selection survives a full page reload. If a project was published but its list could not refresh, use **Load projects**; the editor will clearly report that publication succeeded.
+
+The 6 November save fix preserves strong Blob version tags when JSON grows large enough for transport compression. Concurrent edits remain protected. Read [QA.md](QA.md) for regression evidence.

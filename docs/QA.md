@@ -134,3 +134,13 @@ Production build and 45 unit/render/API checks pass. Twelve-route/60-width brows
 ## Explicit homepage navigation — 5 November 2026
 
 Added Home as the first main-navigation item and a visible Back to home control on inner pages, including mobile outside the menu. The logo remains linked to the homepage. Production build passes. Sixteen navigation/viewport checks across work/contact/manage/about at 320/390/1101/1440 verify return navigation, current-page indication and no overflow; contact-page axe checks have zero violations. Evidence: `artifacts/back-home-checks.json` and `back-home-mobile.png`.
+
+## Project save failure — 6 November 2026
+
+Reproduced the reported failure with a larger private JSON record. Brotli compression changed the GET response's strong storage ETag into a weak HTTP ETag (`W/…`). The save endpoint passed that transport tag to Blob's conditional write, which rejected it. Small one-project fixtures had not crossed the compression threshold.
+
+Mutable private JSON reads (projects, CV metadata, login counters) now request `Accept-Encoding: identity`, preserving the strong origin ETag. The project API also accepts an older open tab's equivalent weak tag for comparison, while still writing against the freshly read strong version. Genuine stale/conflicting writes remain blocked. Storage outages/rate limits now return 503/429 instead of being misreported as reload conflicts. Logs include error kind/status only, without file URLs, draft contents or tokens.
+
+The project manager retains successfully uploaded files and the project UUID during retries in the current tab. Retrying a lost response is idempotent. A failed list refresh after a confirmed save is reported as published, not as a failed publication. Drafts are not claimed to survive a browser reload.
+
+Production build and 47 unit/render/API checks pass. Real isolated Blob regression reproduces the old rejection using a compressed record, then verifies append, removal and stale-write protection with the fix. Browser integration seeds two larger QA entries, simulates a failed save and a failed list refresh, retries with exactly one upload-token request, verifies stable ID/media reuse, appends another project using a legacy weak version tag and checks real stale rejection and deletion. Test records and uploaded JPEG were removed; no production project records were written. Evidence: `artifacts/blob-record-regression.json` and `project-retry-browser.json`.
